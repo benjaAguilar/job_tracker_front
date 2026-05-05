@@ -6,6 +6,7 @@ import App from "./App";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Register } from "./pages/auth/Register";
 import { Login } from "./pages/auth/Login";
+import { Kanban } from "./pages/panel/Kanban";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/panel/job_track",
+        element: <Kanban />,
       },
     ],
   },
