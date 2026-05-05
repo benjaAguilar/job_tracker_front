@@ -11,25 +11,25 @@ import {
 
 function App() {
   return (
-    <section className="grid grid-cols-2 h-full p-12">
-      <div className="flex justify-center flex-col gap-10">
-        <div className="w-fit">
-          <h1 className="font-heading text-7xl">
+    <section className="grid grid-cols-1 lg:grid-cols-2 gap-7 h-full p-12">
+      <div className="flex justify-center items-center flex-col gap-10">
+        <div className="flex flex-col items-center">
+          <h1 className="text-center font-heading text-7xl">
             Welcome To <span className="text-teal-500">Tracki'n</span>
           </h1>
-          <p className="text-center mt-3 opacity-70">
+          <p className="mt-3 opacity-70">
             A job application tracker with stats and charts
           </p>
-        </div>
-        <div className="flex gap-3">
-          <Button className="w-28">Get Started</Button>
-          <Button variant="secondary" className="w-28">
-            Login
-          </Button>
-          <ModeToggle />
+          <div className="flex flex-wrap justify-center gap-3 mt-20">
+            <Button className="w-28">Get Started</Button>
+            <Button variant="secondary" className="w-28">
+              Login
+            </Button>
+            <ModeToggle />
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-7">
+      <div className="flex flex-col justify-center gap-7">
         <Card>
           <CardHeader>
             <CardTitle>Kanban of job applications 👈</CardTitle>
