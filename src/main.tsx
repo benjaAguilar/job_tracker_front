@@ -7,6 +7,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import { Register } from "./pages/auth/Register";
 import { Login } from "./pages/auth/Login";
 import { Kanban } from "./pages/panel/Kanban";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,8 @@ if (!root) throw new Error("root is undefined");
 
 ReactDOM.createRoot(root).render(
   <ThemeProvider>
-    <RouterProvider router={router} />
+    <TooltipProvider>
+      <RouterProvider router={router} />
+    </TooltipProvider>
   </ThemeProvider>,
 );
