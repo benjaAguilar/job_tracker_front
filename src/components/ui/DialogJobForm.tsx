@@ -20,11 +20,14 @@ import {
   SelectLabel,
   SelectItem,
 } from "./select";
-import type { KanbanCardTypes } from "./KanbanCard";
 import { useState } from "react";
 import { TechAdder } from "./TechAdder";
 
-export function DialogJobForm({ title }: KanbanCardTypes) {
+interface DialogJobTypes {
+  title: string;
+}
+
+export function DialogJobForm({ title }: DialogJobTypes) {
   const [state, setState] = useState(title.toLocaleLowerCase());
 
   return (
