@@ -7,13 +7,13 @@ import {
   FieldLabel,
   FieldLegend,
 } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { InputWithValidation } from "@/components/ui/InputWithValidation";
 import { InputValidatorBuilder } from "@/lib/validateInput";
 import { useState } from "react";
 
 export function Register() {
   const [validation, setValidations] = useState<string[]>([]);
+  const [passwordVal, setPasswordVal] = useState<string>("");
 
   return (
     <section className="flex items-center justify-center h-full p-7">
@@ -22,6 +22,7 @@ export function Register() {
           onSubmit={(e) => {
             e.preventDefault();
             if (validation.length >= 1) return alert("complete the fields");
+            alert("form success");
           }}
         >
           <FieldGroup className="flex flex-col items-center justify-center gap-0 mb-7">
@@ -65,13 +66,35 @@ export function Register() {
                 setValidationMessages={setValidations}
               />
             </Field>
-            <Field>
+            <Field className="gap-0">
               <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input type="password" id="password" required />
+              <InputWithValidation
+                type="password"
+                id="password"
+                name="password"
+                onChange={(e) => {
+                  setPasswordVal(e.target.value);
+                }}
+                value={passwordVal}
+                validations={new InputValidatorBuilder()
+                  .setNotEmpty()
+                  .setLength(8, 30)
+                  .build()}
+                setValidationMessages={setValidations}
+              />
             </Field>
-            <Field>
+            <Field className="gap-0">
               <FieldLabel htmlFor="r_password">Repeat password</FieldLabel>
-              <Input type="password" id="r_password" required />
+              <InputWithValidation
+                type="password"
+                id="r_password"
+                name="r_password"
+                validations={new InputValidatorBuilder()
+                  .setPasswordsMatch()
+                  .build()}
+                setValidationMessages={setValidations}
+                passwordInput={passwordVal}
+              />
             </Field>
             <Button type="submit" className="col-start-1 md:col-start-2">
               Register
