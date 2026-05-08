@@ -11,11 +11,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 interface Props extends ComponentPropsWithoutRef<typeof Input> {
   validations: InputValidator;
   setValidationMessages: Dispatch<SetStateAction<string[]>>;
+  passwordInput?: string;
 }
 
 export function InputWithValidation({
   validations,
   setValidationMessages,
+  passwordInput,
   className,
   onChange,
   ...props
@@ -35,7 +37,9 @@ export function InputWithValidation({
           <Tooltip>
             <TooltipTrigger className="w-full flex">
               <span className="underline text-destructive text-xs m-0.5">
-                {validationArr[0].slice(0, 30)}...more
+                {validationArr.length === 1
+                  ? validationArr[0]
+                  : `${validationArr[0].slice(0, 30)}...more`}
               </span>
             </TooltipTrigger>
             <TooltipContent className="flex flex-col items-center justify-center">
@@ -51,7 +55,10 @@ export function InputWithValidation({
       <Input
         {...props}
         onChange={(e) => {
-          const res = validations.validate(e.target.value, e.target.name);
+          const res = validations.validate(
+            e.target.value,
+            passwordInput ? passwordInput : e.target.name,
+          );
           setValidationArr(res);
           setValidationMessages(res);
           onChange?.(e);
