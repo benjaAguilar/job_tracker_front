@@ -8,6 +8,7 @@ export class InputValidator {
     this.validations.set("length", builder.length);
     this.validations.set("isEmail", builder.isEmail);
     this.validations.set("isAplhaNumeric", builder.isAplhaNumeric);
+    this.validations.set("passwordsMatch", builder.passwordsMatch);
   }
 
   validate(input: string, fieldName: string) {
@@ -26,6 +27,7 @@ export class InputValidatorBuilder {
   length?: Fn;
   isEmail?: Fn;
   isAplhaNumeric?: Fn;
+  passwordsMatch?: Fn;
 
   setNotEmpty() {
     this.notEmpty = (input: string, fieldName: string) => {
@@ -67,6 +69,16 @@ export class InputValidatorBuilder {
       const alphaRegex = /^[a-zA-Z0-9]+$/;
       if (!alphaRegex.test(input)) {
         return `${fieldName} should only have alphanumeric characters`;
+      }
+      return null;
+    };
+    return this;
+  }
+
+  setPasswordsMatch() {
+    this.passwordsMatch = (input: string, pwd: string) => {
+      if (input !== pwd) {
+        return `Passwords do not match`;
       }
       return null;
     };
